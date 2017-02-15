@@ -13,7 +13,7 @@ class GooglePhoto {
 	}
 
 	public function getImg($size, $crop = false, $alt = '') {
-		return '<img src="' . $this->getResizedUrl($size, $crop) . '"' . ($size ? ' width="' . $size . '"' : '') . ' alt="' . Util::escape($alt) . '" />';
+		return '<img src="' . $this->getResizedUrl($size, $crop) . '" alt="' . Util::escape($alt) . '" />';
 	}
 
 	public function getSrc($size, $crop = false) {
