@@ -1,0 +1,24 @@
+div#message-box {
+	border: 1px solid #ccc;
+	margin: 0;
+	margin-bottom: 5px;
+	vertical-align: middle;
+	padding:5px;
+}
+div#message-icon-error {
+	background-image: url('../icons/error.jpg');
+}
+div#message-icon-notice {
+	background-image: url('../icons/ok.jpg');
+}
+div#message-icon-notice, div#message-icon-error {
+	width: 18px;
+	height: 18px;
+	margin-right:10px;
+}
+div#message-text {
+	line-height: 1.5;
+	font-style: italic;
+	font-size: 13px;
+}
+

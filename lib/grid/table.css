@@ -1,0 +1,92 @@
+div.grid-container {
+}
+div.grid-toolbar {
+}
+div.grid-data {
+}
+div.grid-pager {
+}
+
+table.grid {
+	border-width: 0 0 1px 1px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	width:100%;
+}
+table.grid th {
+	border-width: 1px 1px 0 0;
+	margin: 0;
+	padding: 5px;
+}
+table.grid, table.grid td, table.grid th {
+	border-color: #ccc;
+	border-style: solid;
+}
+table.grid td {
+	margin: 0;
+	padding: 4px;
+	border-width: 1px 1px 0 0;
+}
+td.numeric {
+	text-align: right;
+}
+table.grid tr.grid-odd {
+	background-color: #fff;
+}
+table.grid tr.grid-even {
+	background-color: #eee;
+}
+table.grid tr.grid-summary td {
+	background: #ccc;
+	font-weight:bold;
+	text-align:right;
+	border:1px solid white;
+}
+div.grid-filter {
+	padding: 6px 0 6px 0;
+}
+div.grid-filter .grid-searchbox {
+	width: 150px;
+}
+div.grid-pager-rowcount {
+	float: left;
+}
+div.grid-pager-records-per-page {
+	margin-top: 6px;
+	text-align: right;
+}
+div.grid-pager {
+	clear: both;
+	margin-top: 10px;
+	text-align: center;
+}
+div.grid-pager span {
+	margin: 1px;
+	border: 1px solid gray;
+	padding: 1px 4px 1px 4px;
+}
+div.grid-pager a {
+	text-decoration:none;
+}
+div.grid-pager span.current {
+	font-weight:bold;
+}
+
+div.add-new {
+	padding:5px 0;
+}
+
+ul.export {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+ul.export li {
+}
+div.export-csv {
+	background: url('theme/icons/csv.gif') no-repeat center left;
+	padding-left:8px;
+	padding-top:6px;
+	margin:2px;
+	height:16px;
+}

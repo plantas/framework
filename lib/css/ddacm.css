@@ -1,0 +1,19 @@
+.ddacm {
+	border:1px solid #D4D0C8;
+	padding:2px;
+}
+.ddacm ul {
+	margin-left:20px;
+	padding:0px;
+}
+.ddacm ul li {
+	line-height:2;
+}
+.ddacm ul li span.remove {
+	background: url('../icons/delete10x10.gif') no-repeat left bottom;
+	width:10px;
+	height:15px;
+	cursor:pointer;
+	display: inline-block;
+}
+
