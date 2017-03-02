@@ -23,6 +23,7 @@ class DropDown extends FormElement {
 		$ret = '<select name="'.$this->getName().'"';
 		if ($this->getOnChange()) $ret .= ' onchange="'.$this->getOnChange().'"';
 		if ($this->getReadOnly()) $ret .= ' disabled="disabled"';
+		if ($id = $this->getId()) $ret .= ' id="'.$id.'"';
 		$ret .= '>';
 		if (!$this->disableNullOption) {
 			$ret .= '<option value="">&nbsp;</option>';
