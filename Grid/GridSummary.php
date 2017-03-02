@@ -19,7 +19,7 @@ class GridSummary {
 	public static function avg($args) {
 		$cnt = count($args[Grid::SF_VALUES]);
 		if ($cnt == 0) return 0;
-		return self::sum($args) / $cnt;
+		return number_format((self::sum($args) / $cnt), 2);
 	}
 
 	// sumira format hh:mm TODO hh:mm:ss - dodati novu funkciju
