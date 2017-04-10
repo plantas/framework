@@ -71,7 +71,7 @@ class DataSourcePdo extends DataSource implements IDataSourceDistinctable {
 				// backwards compatibility array('id', 'name') will be 'order by id asc, name asc'
 				$a[] = $direction . ' asc';
 			} else {
-				$a[] = $column . ' ' . $direction . ($direction == 'desc' ? ' NULLS LAST' : '');
+				$a[] = $column . ' ' . $direction;
 			}
 		}
 		return ' ORDER BY ' . implode(', ', $a);
