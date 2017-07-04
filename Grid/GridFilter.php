@@ -28,7 +28,7 @@ abstract class GridFilter implements IGridPlugin {
 	protected function getSearchableColumns() {
 		$searchable = array();
 		foreach ($this->getGrid()->getColumns() as $col) {
-			if ($col->getSearchable() && $col->getVisible()) {
+			if ($col->getSearchable()) { // && $col->getVisible()
 				$searchable[] = $col;
 			}
 		}
