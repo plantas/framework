@@ -64,7 +64,7 @@ class Picasa {
 			$album->setTitle((string) $xml->entry[$i]->title);
 			$album->setPublished((string) $xml->entry[$i]->published);
 			$album->setRights((string) $xml->entry[$i]->rights);
-
+			$album->setUrl((string) $xml->entry[$i]->link[1]->attributes()->href);
 			$albums[] = $album;
 		}
 		return $albums;
@@ -78,6 +78,7 @@ class PicasaAlbum {
 	protected $published;
 	protected $rights;
 	protected $images = array();
+	protected $url;
 	
 	public function setId($id) {
 		$this->id = $id;
@@ -117,6 +118,14 @@ class PicasaAlbum {
 
 	public function getImages() {
 		return $this->images;
+	}
+
+	public function setUrl($url) {
+		$this->url = $url;
+	}
+
+	public function getUrl() {
+		return $this->url;
 	}
 }
 
