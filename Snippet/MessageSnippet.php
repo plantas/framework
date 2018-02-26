@@ -21,13 +21,9 @@ class MessageSnippet extends Snippet {
 		File::includeCss('css/message.css', File::LIB_DIR);
 		File::includeJs('jquery.js', File::LIB_DIR);
 ?>
-<div id="message-box">
-	<table>
-		<tr>
-			<td valign="middle"><div id="message-icon-<?=$msg[self::MSG_TYPE]?>">&nbsp;</div></td>
-			<td><div id="message-text"><?=$msg[self::MSG_TXT]?></div></td>
-		</tr>
-	</table>
+<div class="message-box">
+	<div class="message-icon-<?=$msg[self::MSG_TYPE]?>">&nbsp;</div>
+	<div class="message-text"><?=$msg[self::MSG_TXT]?></div>
 </div>
 <script>
 <?php if ($msg[self::MSG_TIMEOUT] == 0) : ?>
