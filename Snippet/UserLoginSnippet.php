@@ -37,6 +37,9 @@ abstract class UserLoginSnippet extends Snippet {
 		return Session::get(self::SESS_USER_ID);
 	}
 
+	public static function setLoggedUserId($id) {
+        Session::set(self::SESS_USER_ID, $id);
+    }
 
 	public function __construct(Section $section, $params = array()) {
 		parent::__construct($section, $params);
