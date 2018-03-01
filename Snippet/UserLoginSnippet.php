@@ -38,8 +38,8 @@ abstract class UserLoginSnippet extends Snippet {
 	}
 
 	public static function setLoggedUserId($id) {
-        Session::set(self::SESS_USER_ID, $id);
-    }
+		Session::set(self::SESS_USER_ID, $id);
+	}
 
 	public function __construct(Section $section, $params = array()) {
 		parent::__construct($section, $params);
