@@ -18,7 +18,7 @@ class MessageSnippet extends Snippet {
 		$msg = $this->getMessage();
 		if (!$msg) return '';
 
-		File::includeCss('css/message.css', File::LIB_DIR);
+		File::includeCss('css/message.css?v=1', File::LIB_DIR);
 		File::includeJs('jquery.js', File::LIB_DIR);
 ?>
 <div class="message-box">
