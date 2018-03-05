@@ -46,7 +46,7 @@ div.grid-filter {
 	padding: 6px 0 6px 0;
 }
 div.grid-filter .grid-searchbox {
-	width: 150px;
+	min-width: 150px;
 }
 div.grid-pager-rowcount {
 	float: left;
