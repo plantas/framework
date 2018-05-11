@@ -20,18 +20,18 @@ class Db {
 
 		switch ($driver) {
 			case 'mysql':
-				return new PDO(
+				$pdo = new PDO(
 					'mysql:host=' . $dbhost . ';dbname=' . $dbname,
 					$dbuser,
-					$dbpass,
-					array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8, time_zone = 'CET';")
+					$dbpass
 				); 
+				$pdo->query('SET NAMES utf8');
+				return $pdo;
 			case 'pgsql':
 				return new PDO(
 					'pgsql:host=' . $dbhost . ';dbname=' . $dbname,
 					$dbuser,
-					$dbpass,
-					null
+					$dbpass
 				); 
 			default:
 				throw new Exception('DB driver undefined');

@@ -34,6 +34,11 @@ class GooglePhoto {
 
 		} else if (preg_match('!\/s(\d+).*?\/!', $this->url, $m)) {
 			return preg_replace('!\/s(\d{2,})(.*?)\/!', '/s' . $size . ($crop ? '-c' : '') . '$2/', $this->url);
+
+		// https://lh3.googleusercontent.com/fVzg62SbhLN4-JPbw9_nhTpykm-q0dKiJ8MAH_5t_naVWctAh5599eXZl5Eem8koX95E3yr0mqt2Vbc=s640-rw
+		} else if (preg_match('!\=s(\d+)-(\w{2}+)$!', $this->url, $m)) {
+			return preg_replace('!\=s(\d{2,})(.*)$!', '=s' . $size . ($crop ? '-c' : '') . '$2', $this->url);
+
 		} else {
 			//trigger_error('Error parsing image dimensions from URL ' . $this->url);
 			return $this->url;

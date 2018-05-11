@@ -51,7 +51,9 @@ $lang = array(
 	'Successfully saved' => array('HR' => 'Uspješno spremljeno'),
 	'Successfully deleted' => array('HR' => 'Uspješno obrisano'),
 	'Successfully added' => array('HR' => 'Uspješno dodano'),
+	'Successfully sent' => array('HR' => 'Uspješno poslano'),
 	'Add new record' => array('HR' => 'Kreiraj novi zapis'),
+	'Failed to send' => array('HR' => 'Slanje nije uspjelo'),
 
 	//captcha
 	'Captcha' => array('HR' => 'Sigurnosni kod'),

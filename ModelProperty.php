@@ -56,9 +56,8 @@ class BooleanModelProperty extends ModelProperty {
 	}
 
 	public function setValue($value) {
-		if (!$this->nullable && is_null($value)) {
-			// null means false if property is not nullable
-			$this->value = 0;
+		if (is_null($value)) {
+			$this->value = $this->nullable ? null : 0;
 		} else {
 			$this->value = ($value) ? 1 : 0;
 		}
