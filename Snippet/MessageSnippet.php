@@ -27,11 +27,11 @@ class MessageSnippet extends Snippet {
 </div>
 <script>
 <?php if ($msg[self::MSG_TIMEOUT] == 0) : ?>
-$("#message-box").click(function () {
-	$("#message-box").fadeOut("slow");
+$(".message-box").click(function () {
+	$(".message-box").fadeOut("slow");
 });
 <?php else : ?>
-$("#message-box").delay(<?=$msg[self::MSG_TIMEOUT] * 1000?>).fadeOut("slow");
+$(".message-box").delay(<?=$msg[self::MSG_TIMEOUT] * 1000?>).fadeOut("slow");
 <?php endif; ?>
 </script>
 <?php

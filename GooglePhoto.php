@@ -39,9 +39,10 @@ class GooglePhoto {
 		} else if (preg_match('!\=s(\d+)-(\w{2}+)$!', $this->url, $m)) {
 			return preg_replace('!\=s(\d{2,})(.*)$!', '=s' . $size . ($crop ? '-c' : '') . '$2', $this->url);
 
+		} else if (preg_match('!\=s(\d+)$!', $this->url, $m)) {
+			return preg_replace('!\=s(\d+)$!', '=s' . $size . ($crop ? '-c' : ''), $this->url);
 		} else {
-			//trigger_error('Error parsing image dimensions from URL ' . $this->url);
-			return $this->url;
+			return $this->url . '=s' . $size . ($crop ? '-c' : '');
 		}
 	}
 }
