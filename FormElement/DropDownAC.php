@@ -65,7 +65,7 @@ $().ready(function() {
 </script>');
 		
 		$ret = '<input type="hidden" value="' . Util::escape($this->getValue()) . '" name="' . $this->getName() . '" id="' . $id . '" />';
-		$ret .= '<input type="text" id="' . $id . '-da" value=""';
+		$ret .= '<input type="text" id="' . $id . '-da" name="' . self::getRawInputName($id) . '" value=""';
 		if ($this->value) {
 			$ret .= ' style="background:'.$bgCss.'"';
 		}
@@ -85,5 +85,9 @@ $().ready(function() {
 		$ret .= ' autocomplete="off" />';
 
 		return $ret;
+	}
+
+	public static function getRawInputName($id) {
+		return $id . '-text';
 	}
 }
