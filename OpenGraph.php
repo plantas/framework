@@ -19,7 +19,7 @@ class OpenGraph {
 		if ($this->type) $headers['type'] = $this->type;	
 		if ($this->url) $headers['url'] = $this->url;	
 		if ($this->siteName) $headers['site_name'] = Util::escape($this->siteName);	
-		if ($this->description) $headers['description'] = Util::escape($this->description);	
+		if ($this->description || $this->title) $headers['description'] = empty($this->description) ? Util::escape($this->title) : Util::escape($this->description);	
 
 		$html = '';
 		foreach ($headers as $k => $v) {
