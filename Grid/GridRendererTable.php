@@ -86,13 +86,17 @@ class GridRendererTable extends GridRenderer {
 			if ($req[GridFilterAdvancedPlugin::BUTTON] || $req[GridFilterAdvancedPlugin::RESET] || is_array($c->get(GridFilterAdvancedPlugin::FILTER))) $active = 'advancedfilter';
 			if ($req[GridColumnManagerPlugin::SHOW_ALL_BTN] || $req[GridColumnManagerPlugin::HIDE_BTN]) $active = 'colman';
 
-			$t = new Tabs(array(
+			$t = $this->tabsFactory(array(
 				Element::ID => 'grid-toolbar-' . uniqid(),
 				Tabs::TABS => $tabs,
 				Tabs::ACTIVE_TAB_ID => $active
 			));
 			return $t->getHtml();
 		}
+	}
+
+	protected function tabsFactory(array $params) {
+		return new Tabs($params);
 	}
 
 	protected function getTableHeader() {

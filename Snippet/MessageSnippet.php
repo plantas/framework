@@ -21,7 +21,7 @@ class MessageSnippet extends Snippet {
 		File::includeCss('css/message.css?v=1', File::LIB_DIR);
 		File::includeJs('jquery.js', File::LIB_DIR);
 ?>
-<div class="message-box">
+<div class="message-box <?=$this->typeToCssClass($msg[self::MSG_TYPE])?>">
 	<div class="message-icon-<?=$msg[self::MSG_TYPE]?>">&nbsp;</div>
 	<div class="message-text"><?=$msg[self::MSG_TXT]?></div>
 </div>
@@ -50,6 +50,15 @@ $(".message-box").delay(<?=$msg[self::MSG_TIMEOUT] * 1000?>).fadeOut("slow");
 		$msg = Session::get(self::SESS_MSG_VAR);
 		Session::set(self::SESS_MSG_VAR, null);
 		return $msg;
+	}
+
+	protected function typeToCssClass($type) {
+		switch($type) {
+			case self::TYPE_ERROR: return 'alert-danger';
+			case self::TYPE_NOTICE: 
+			default:
+				return 'alert-success';
+		}
 	}
 
 }
