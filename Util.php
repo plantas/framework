@@ -74,7 +74,7 @@ class Util {
 		if (!is_array($parts)) return null;
 
 		// fix value if has leading slash remove it
-		if ($var{0} == '/') $var = substr($var, 1);
+		if (substr($var, 0, 1) == '/') $var = substr($var, 1);
 		$index = array_search($var, $parts);
 		if ($index === false) return null;		
 		return isset($parts[$index+1]) ? $parts[$index+1] : null;

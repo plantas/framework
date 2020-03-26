@@ -21,7 +21,7 @@ class Db {
 		switch ($driver) {
 			case 'mysql':
 				$pdo = new PDO(
-					'mysql:host=' . $dbhost . ';dbname=' . $dbname,
+					'mysql:host=' . $dbhost . ';dbname=' . $dbname . ';charset=utf8',
 					$dbuser,
 					$dbpass
 				); 

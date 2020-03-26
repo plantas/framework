@@ -21,9 +21,6 @@ class Request {
 
 	protected function init() {
 		$this->vars = $_REQUEST;
-		if (get_magic_quotes_gpc()) {
-			$this->vars = self::stripslashesRecursive($this->vars);
-		}
 	}
 
 	public static function getInstance() {

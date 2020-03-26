@@ -87,7 +87,7 @@ class Url {
 		// strip ending slashes
 		$url = preg_replace('!/*$!', '', $url);
 
-		if ($url{0} != '/') {
+		if (substr($url, 0, 1) != '/') {
 			$url = '/' . $url;
 		}
 
