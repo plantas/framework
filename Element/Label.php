@@ -28,7 +28,7 @@ class Label extends Element {
 		if (!empty($this->title)) {
 			$ret .= ' title="' . Util::escape($this->title) . '"';
 		}
-		$ret .= '>' . $this->text . '</label>';
+		$ret .= '>' . Util::escape($this->text) . '</label>';
 
 		return $ret;
 	}
