@@ -56,11 +56,11 @@ class SimpleTabs extends Element {
 	private function css() {
 return <<<EOF
 <style type="text/css">
-.widget-tab { overflow: hidden; border: 1px solid #ccc; border-bottom:0; background-color: #ddd; }
-.widget-tab button { background-color: inherit; float: left; border: none; border-right:1px solid #ccc; outline: none; cursor: pointer; padding: 6px 12px; transition: 0.3s; }
-.widget-tab button:hover { background-color: #ccc; }
-.widget-tab button.active { background-color: #fff; border-bottom:0; }
-.widget-tab-content { display: none; padding: 12px; border: 1px solid #ccc; border-top: none; margin-bottom:10px; }
+.widget-tab { overflow: hidden; border: 1px solid #ccc; background-color: #f1f1f1; }
+.widget-tab button { background-color: inherit; float: left; border: none; border-right:1px solid #ccc; outline: none; cursor: pointer; padding: 10px 15px; transition: 0.3s; }
+.widget-tab button:hover { background-color: #ddd; }
+.widget-tab button.active { background-color: #ccc; }
+.widget-tab-content { display: none; padding: 6px 12px; border: 1px solid #ccc; border-top: none; }
 </style>
 EOF;
 	
@@ -79,7 +79,7 @@ EOF;
 		foreach ($this->tabs as $t) {
 			$class = ($t[self::TAB_ID] == $this->activeTabId) ? ' active' : '';
 			$ret .= '
-				<button class="widget-tab-links'.$class.'" onclick="openTab(event, \''.$id.'-tab-'.(!empty($t[self::TAB_ID]) ? $t[self::TAB_ID] : $i++).'\')">'.Util::escape($t[self::TAB_TITLE]).'</button>';
+				<button class="widget-tab-links'.$class.'" onclick="openTab(event, \''.$id.'-tab-'.(!empty($t[self::TAB_ID]) ? $t[self::TAB_ID] : $i++).'\');return false;">'.Util::escape($t[self::TAB_TITLE]).'</button>';
 		}
 		$ret .= '
 			</div>';
