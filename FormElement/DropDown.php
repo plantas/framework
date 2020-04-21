@@ -19,8 +19,12 @@ class DropDown extends FormElement {
 		}
 	}
 
+	public function getCssClass() {
+		return $this->cssClass . (empty($this->cssClass) ? '' : ' ') . 'form-control';
+	}
+
 	public function getHtml() {
-		$ret = '<select name="'.$this->getName().'"';
+		$ret = '<select name="'.$this->getName().'" class="'.$this->getCssClass().'"';
 		if ($this->getOnChange()) $ret .= ' onchange="'.$this->getOnChange().'"';
 		if ($this->getReadOnly()) $ret .= ' disabled="disabled"';
 		if ($id = $this->getId()) $ret .= ' id="'.$id.'"';
