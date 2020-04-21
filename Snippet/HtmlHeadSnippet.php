@@ -44,4 +44,8 @@ class HtmlHeadSnippet extends Snippet {
 	public static function addHeadString($string) {
 		self::$headString .= $string . "\n";
 	}
+
+	public static function getHeadString() {
+		return self::$headString;
+	}
 }
