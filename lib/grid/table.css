@@ -46,7 +46,13 @@ div.grid-filter {
 	padding: 6px 0 6px 0;
 }
 div.grid-filter .grid-searchbox {
-	min-width: 150px;
+	min-width: 300px;
+	padding:0 4px;
+}
+div.grid-filter input.line {
+	min-width: 200px;
+	padding:0 4px;
+	display: inline-block;
 }
 div.grid-pager-rowcount {
 	float: left;
@@ -71,22 +77,24 @@ div.grid-pager a {
 div.grid-pager span.current {
 	font-weight:bold;
 }
-
+div.grid-cm-columns {
+}
+.grid-cm-label {
+	margin-right:15px;
+}
+.grid-cm-label input {
+	margin-right:2px;
+	vertical-align:text-top;
+}
+.grid-cm-btns {
+}
 div.add-new {
 	padding:5px 0;
 }
-
 ul.export {
 	margin:0;
 	padding:0;
 	list-style-type:none;
 }
 ul.export li {
-}
-div.export-csv {
-	background: url('theme/icons/csv.gif') no-repeat center left;
-	padding-left:8px;
-	padding-top:6px;
-	margin:2px;
-	height:16px;
 }
