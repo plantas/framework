@@ -59,7 +59,8 @@ class DatePicker extends TextLine {
 </script>
 ';		
 		}
-		$ret .= '<input type="text" id="da-' . $id . '" name="da-' . $this->getName() . '" value="' . Util::formatDate($this->getValue(), $this->format) . '" readonly="readonly" />';
+		$ret .= '<div class="input-group">';
+		$ret .= '<input type="text" id="da-' . $id . '" name="da-' . $this->getName() . '" value="' . Util::formatDate($this->getValue(), $this->format) . '" readonly="readonly" class="form-control col-3" />';
 		if (!$ro) {
 			// hide button if it is readonly
 			$ret .= '<input type="button" id="btn-' . $id . '" value="..." class="calendar-picker" />';
@@ -67,6 +68,7 @@ class DatePicker extends TextLine {
 		}
 		// value is stored in this hidden field
 		$ret .= '<input type="hidden" name="' . $this->getName() . '" value="' . $this->getValue() . '" id="' . $id . '" />';
+		$ret .= '</div>';
 
 		return $ret;
 	}
