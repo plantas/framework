@@ -20,15 +20,17 @@ class TextLine extends FormElement {
 		}
 	}
 
+	public function getCssClass() {
+		return $this->cssClass . (empty($this->cssClass) ? '' : ' ') . 'line form-control';
+	}
+
 	public function getHtml() {
 		$ret = '<input type="text" name="' . $this->getName() . '" value="' . Util::escape($this->getValue()) . '"';
 		$id = $this->getId();
 		if ($id) {
 			$ret .= ' id="' . $id . '"';
 		}
-		$cssClass = $this->getCssClass();
-		$cssClass = ($cssClass) ? $cssClass . ' line' : 'line';
-		$ret .= ' class="' . $cssClass . '"';
+		$ret .= ' class="' . $this->getCssClass() . '"';
 		if ($this->getReadOnly()) {
 			$ret .= ' readonly="readonly"';
 		}
