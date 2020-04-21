@@ -52,18 +52,18 @@ class GridColumnManagerPlugin implements IGridPlugin {
 		foreach ($this->visibleColumns as $k => $c) {
 			$e = new Checkbox(array(
 				Checkbox::NAME => $this->grid->addNamespace(self::COLUMNS_TO_HIDE) . '[' . $k . ']',
-				Checkbox::VALUE => in_array($k, (array) $this->columnsToHide)
-			));	
+				Checkbox::VALUE => in_array($k, (array) $this->columnsToHide),
+			));
 			$f->addElement($e);
 		}
 		$e = new Submit(array(
 			Submit::NAME => $this->grid->addNamespace(self::HIDE_BTN),
-			Submit::VALUE => Lang::get('Hide selected')
+			Submit::VALUE => Lang::get('Hide selected'),
 		));
 		$f->addElement($e);
 		$e = new Submit(array(
 			Submit::NAME => $this->grid->addNamespace(self::SHOW_ALL_BTN),
-			Submit::VALUE => Lang::get('Show all')
+			Submit::VALUE => Lang::get('Show all'),
 		));
 		$f->addElement($e);
 
@@ -72,11 +72,18 @@ class GridColumnManagerPlugin implements IGridPlugin {
 		$ret = $f->getBegin();
 		
 		$i = 0;
+		$ret .= '<div class="grid-cm-columns">';
 		foreach ($this->visibleColumns as $k => $c) {
-			$ret .= $els[$this->grid->addNamespace(self::COLUMNS_TO_HIDE) . '[' . $k . ']'] . Util::escape($c->getTitle()) . ' ';
+			$ret .= '<label class="grid-cm-label">';
+			$ret .= $els[$this->grid->addNamespace(self::COLUMNS_TO_HIDE) . '[' . $k . ']'];
+			$ret .= $c->getTitle();
+			$ret .= '</label>';
+
 			if (++$i%15 == 0) $ret .= '<br />';
 		}
-		$ret .= '<div style="margin-top:5px">'; 
+		$ret .= '</div>';
+
+		$ret .= '<div class="grid-cm-btns">'; 
 		$ret .= $els[$this->grid->addNamespace(self::HIDE_BTN)] . '&nbsp;';
 		$ret .= $els[$this->grid->addNamespace(self::SHOW_ALL_BTN)];
 		$ret .= '</div>';
