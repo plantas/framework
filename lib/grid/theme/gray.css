@@ -1,0 +1,58 @@
+table.grid-container {
+}
+
+table.grid th {
+	background-color: #333;
+	color: #fff;
+}
+
+table.grid span.grid-direction {
+	width:16px;
+	height:12px;
+	float:right;
+	background-repeat: no-repeat; 
+	background-position:top right;
+}
+table.grid th.grid-order-asc span.grid-direction {
+	background-image: url('icons/arrow_down.gif');
+}
+
+table.grid th.grid-order-desc span.grid-direction {
+	background-image: url('icons/arrow_up.gif');
+}
+
+table.grid th a {
+	text-decoration: underline;
+	color: #fff;
+}
+
+table.grid th a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+div.add-new {
+	background: url('icons/create.gif') no-repeat center left;
+	padding-left:20px;
+	margin:5px 0px;
+}
+div.add-new a {
+	font-size:120%;
+}
+
+table.grid tr.grid-odd {
+}
+
+table.grid tr.grid-even {
+}
+
+div.grid-pager span:hover {
+	border-color: black;
+}
+div.grid-pager span.current {
+	background:#ccc;
+}
+div.grid-pager span {
+	min-width:2em;
+	display:inline-block;
+}
