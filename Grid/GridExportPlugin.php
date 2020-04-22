@@ -27,7 +27,7 @@ class GridExportPlugin implements IGridPlugin {
 	public function render() {
 		return '
 			<ul class="export">
-				<li><div class="export-csv"><img src="" border="0" width="16" height="16" align="left" /><a href="' . $this->grid->getApplication()->getUrl()->getSelf() . $this->grid->getUrl(array(self::XLS => 1)) . '">XLS (Excel)</a></div></li>
+				<li><a href="' . $this->grid->getApplication()->getUrl()->getSelf() . $this->grid->getUrl(array(self::XLS => 1)) . '" class="export-csv">XLS (Excel)</a></li>
 			</ul>';
 	}
 
