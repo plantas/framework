@@ -62,7 +62,7 @@ class GridFilterSimplePlugin extends GridFilter {
 		$html  = '<div class="grid-filter">';
 		$html .= '<form action="" method="get">';
 		$html .= $this->grid->getHiddenFields(array(GridPagerPlugin::PAGE => 1));
-		$html .= Lang::get('Filter by') . ': <input type="text" class="grid-searchbox" value="' . Util::escape($this->filter) . '" name="' . $filterName . '" id="' . $filterName . '" /> ';
+		$html .= /*Lang::get('Filter by') . ':'*/  '<input type="text" class="grid-searchbox" value="' . Util::escape($this->filter) . '" name="' . $filterName . '" id="' . $filterName . '" /> ';
 		$html .= '<input type="submit" class="grid-button" name="' . $this->grid->addNamespace(self::BUTTON) . '" value="' . Lang::get('Filter') . '" /> ';
 		$html .= '<input type="submit" class="grid-button" name="' . $this->grid->addNamespace(self::RESET) . '" value="' . Lang::get('Reset') . '" />';
 		$html .= '</form>';
