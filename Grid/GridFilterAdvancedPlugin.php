@@ -248,17 +248,19 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 		$te = new TextLine(array(
 			TextLine::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_TEXT . ']',
 			TextLine::VALUE => $value[self::OPERAND][Value::TYPE_TEXT],
-			TextLine::SIZE => 30
+			TextLine::SIZE => 30,
+			TextLine::CSS_CLASS => 'col-sm-4',
 		));
 		$ne = new TextLine(array(
 			TextLine::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_NUMERIC . ']',
 			TextLine::VALUE => $value[self::OPERAND][Value::TYPE_NUMERIC],
-			TextLine::SIZE => 10
+			TextLine::SIZE => 10,
+			TextLine::CSS_CLASS => 'col-sm-2',
 		));
-		$de = new DatePicker(array(
-			DatePicker::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_DATE . ']',
-			DatePicker::ID => $id . '-' . self::OPERAND . '-' . Value::TYPE_DATE,
-			DatePicker::VALUE => $value[self::OPERAND][Value::TYPE_DATE],	
+		$de = new DateInput(array(
+			DateInput::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_DATE . ']',
+			DateInput::ID => $id . '-' . self::OPERAND . '-' . Value::TYPE_DATE,
+			DateInput::VALUE => $value[self::OPERAND][Value::TYPE_DATE],	
 		));
 		$be = new DropDown(array(
 			DropDown::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_BOOLEAN . ']',
@@ -284,9 +286,6 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 	}
 
 	private function includeJs() {
-		// for dynamic dropdown
-		File::includeJs('jquery.js', File::LIB_DIR);
-
 		HtmlHeadSnippet::addHeadString('
 <script type="text/javascript">
 	function filterDropDowns(dd) {
