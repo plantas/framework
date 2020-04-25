@@ -97,4 +97,6 @@ ul.export {
 	list-style-type:none;
 }
 ul.export li {
+	display:inline-block;
+	margin-right:20px;
 }
