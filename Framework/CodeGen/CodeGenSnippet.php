@@ -9,6 +9,8 @@ class CodeGenSnippet extends Snippet {
 	protected $lang;
 
 	public function run() {
+		if (ENVIRONMENT !== 'DEV') return '';
+
 		$req = $this->getRequest();
 
 		$f = new Form();
