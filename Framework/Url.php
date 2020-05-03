@@ -72,7 +72,6 @@ class Url {
 				$lastSlashPos = strrpos($url, '/');
 				$url = substr($url, 0, $lastSlashPos);
 				if (empty($url)) {
-					Log::error($origUrl . ' 404 Not Found');
 					Http::response(404);
 				}
 			}
