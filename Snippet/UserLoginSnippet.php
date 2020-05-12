@@ -133,7 +133,7 @@ abstract class UserLoginSnippet extends Snippet {
 			<div id="username-field">' . $e[self::REQ_USERNAME] . Util::validationError($r[self::REQ_USERNAME]) . '</div>
 			<div id="password-label">' . $l[self::REQ_PASSWORD] . '</div>
 			<div id="password-field">' . $e[self::REQ_PASSWORD] . Util::validationError($r[self::REQ_PASSWORD]) . '</div>
-			<div id="login-button">' . $e[self::REQ_LOGIN] . '</div>
+			<div id="login-button" class="mt-2">' . $e[self::REQ_LOGIN] . '</div>
 			' . $this->form->getEnd() . '</div>';
 	}
 
@@ -145,7 +145,8 @@ abstract class UserLoginSnippet extends Snippet {
 		$e = new TextLine(array(
 			FormElement::NAME => self::REQ_USERNAME,
 			FormElement::VALUE => $this->username,
-			FormElement::REQUIRED => true
+			FormElement::REQUIRED => true,
+			FormElement::CSS_CLASS => 'form-control',
 		));
 		$this->form->addElement($e);
 
@@ -157,7 +158,8 @@ abstract class UserLoginSnippet extends Snippet {
 		$e = new Password(array(
 			FormElement::NAME => self::REQ_PASSWORD,
 			FormElement::VALUE => '',
-			FormElement::REQUIRED => true
+			FormElement::REQUIRED => true,
+			FormElement::CSS_CLASS => 'form-control',
 		));
 		$this->form->addElement($e);
 
@@ -168,7 +170,8 @@ abstract class UserLoginSnippet extends Snippet {
 
 		$e = new Submit(array(
 			FormElement::NAME => self::REQ_LOGIN, 
-			FormElement::VALUE => Lang::get('Login')
+			FormElement::VALUE => Lang::get('Login'),
+			FormElement::CSS_CLASS => 'btn btn-primary',
 		));
 		$this->form->addElement($e);
 	}

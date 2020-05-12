@@ -27,7 +27,7 @@ class DropDownAC extends DropDown {
 		File::includeJs('jquery-ui.js', File::LIB_DIR);
 		File::includeCss('jquery-ui/css/smoothness/jquery-ui.custom.css', File::LIB_DIR);
 
-		$bgCss = "url('".Config::get('WWW_DIR')."lib/icons/throbber16x16.gif') no-repeat right top";
+		$bgCss = "url('/lib/icons/throbber16x16.gif') no-repeat right top";
 
 		HtmlHeadSnippet::addHeadString('
 <script type="text/javascript">

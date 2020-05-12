@@ -33,7 +33,7 @@ $().ready(function() {
 		source: "' . $this->sourceUrl . '", 
 		width: '.$this->size.',
 		search: function() {
-			$(this).css("background", "url(\''.Config::get('WWW_DIR').'lib/icons/throbber16x16.gif\') no-repeat right top");
+			$(this).css("background", "url(\'/lib/icons/throbber16x16.gif\') no-repeat right top");
 	       	},
 		response: function() {
 			$(this).css("background", "");
