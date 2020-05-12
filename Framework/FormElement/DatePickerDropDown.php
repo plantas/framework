@@ -37,12 +37,14 @@ class DatePickerDropDown extends TextLine {
 			DropDown::VALUE => $d,
 			DropDown::OPTIONS => array_combine(range(1,31), range(1,31)),
 			DropDown::READ_ONLY => $ro,
+			DropDown::CSS_CLASS => 'col-2',
 		));
 		$month = new DropDown(array(
 			DropDown::NAME => $this->getName() . '_m',
 			DropDown::VALUE => $m,
 			DropDown::OPTIONS => array_combine(range(1,12), range(1,12)),
 			DropDown::READ_ONLY => $ro,
+			DropDown::CSS_CLASS => 'col-2',
 		));
 
 		$year = new DropDown(array(
@@ -50,8 +52,9 @@ class DatePickerDropDown extends TextLine {
 			DropDown::VALUE => $y,
 			DropDown::OPTIONS => array_combine(range(date('Y'), 1900), range(date('Y'), 1900)),
 			DropDown::READ_ONLY => $ro,
+			DropDown::CSS_CLASS => 'col-3',
 		));
-		$ret .= $day->getHtml() . ' ' . $month->getHtml() . ' ' .  $year->getHtml();
+		$ret .= '<div class="row">' . $day->getHtml() . ' ' . $month->getHtml() . ' ' .  $year->getHtml() . '</div>';
 		$ret .= '<input type="hidden" id="' . $this->getName() . '" name="' . $this->getName() . '" value="' . $this->getValue() . '" />';
 
 		return $ret;
