@@ -1,0 +1,17 @@
+{
+    "name": "plant/framework",
+    "type": "framework",
+    "license": "none",
+    "authors": [
+        {
+            "name": "Igor Plantas",
+            "email": "igor.plantas@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "mobiledetect/mobiledetectlib": "dev-master",
+        "swiftmailer/swiftmailer": "^6.3@dev",
+        "phpoffice/phpspreadsheet": "dev-master"
+    }
+}

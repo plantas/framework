@@ -1,16 +1,12 @@
 <?php
 
-function pre_var_dump($var) {
-	echo '<pre>';
-	var_dump($var);
-	echo '</pre>';
-}
+require(dirname(__FILE__) . '/vendor/autoload.php');
 
 class Framework {
 
-	public static function getClassDirs() {
+	protected static function getClassDirs() {
 		return array(
-			'/',	
+			'/',
 			'/Interface/',	
 			'/Section/',	
 			'/Snippet/',	
@@ -26,7 +22,7 @@ class Framework {
 	public static function autoload($class) {
 		$dirs = self::getClassDirs();
 		foreach ($dirs as $d) {
-			$f = dirname(__FILE__) . $d . $class . '.php';
+			$f = dirname(__FILE__) . '/Framework' . $d . $class . '.php';
 			if (is_file($f)) {
 				return include($f);
 			}
