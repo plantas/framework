@@ -84,7 +84,7 @@ div.grid-cm-columns {
 }
 .grid-cm-label input {
 	margin-right:2px;
-	vertical-align:text-top;
+	vertical-align:baseline;
 }
 .grid-cm-btns {
 }
