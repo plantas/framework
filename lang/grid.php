@@ -26,6 +26,7 @@ $lang = array(
 	'similar to' => array('HR' => 'sadrži'),
 	'greater than' => array('HR' => 'veće od'),
 	'less than' => array('HR' => 'manje od'),
+	'empty' => array('HR' => 'prazno'),
 
 	// data export
 	'Data export' => array('HR' => 'Izvoz podataka')

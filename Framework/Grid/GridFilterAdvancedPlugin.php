@@ -11,6 +11,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 	const OPERATOR_NOT_EQUAL_TO = 'NE';
 	const OPERATOR_GREATER_THAN = 'GT';
 	const OPERATOR_LESS_THAN = 'LT';
+	const OPERATOR_EMPTY = 'EM';
 
 	const BUTTON = 'advancedFilter';
 	const RESET = 'afReset'; // different simple/advanced reset to keep focus
@@ -33,7 +34,6 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 			$this->filter = null;
 			$c->set(self::FILTER, $this->filter);
 		}
-
 		$ds = $this->grid->getDataSource();
 
 		if (!is_array($this->filter)) $this->filter = null;
@@ -68,9 +68,10 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 			foreach ($filter as $k => $f) {
 				$column = $this->getSearchableColumnByName($f[self::COLUMN]);
 				// drop non searchable and empty operand cols
-				if (!$column instanceof GridColumn || (!is_numeric($f[self::OPERAND][$column->getType()]) && empty($f[self::OPERAND][$column->getType()]))) {
+				//if (!$column instanceof GridColumn || (!is_numeric($f[self::OPERAND][$column->getType()]) && empty($f[self::OPERAND][$column->getType()]))) {
+				if (!$column instanceof GridColumn || ($f[self::OPERATOR] !== 'EM' && empty($f[self::OPERAND][$column->getType()]))) {
 					unset($filter[$k]);
-					continue;
+					//continue;
 				}
 			}
 			return $filter;
@@ -181,6 +182,14 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 					$e = $ds->expressionLessThanFactory($column->getName(), $val); 
 				}
 				break;
+			case self::OPERATOR_EMPTY:
+				if (in_array($type, array(Value::TYPE_TEXT, Value::TYPE_NUMERIC, Value::TYPE_DATE, Value::TYPE_BOOLEAN))) {
+					$e = $ds->expressionIsNullFactory($column->getName());
+					if ($type == Value::TYPE_TEXT) { // or empty string
+						$e = $ds->expressionOrFactory($e, $ds->expressionEqualToFactory($column->getName(), $ds->valueTextFactory('')));
+					}
+				}
+				break;
 		}
 
 		if ($e instanceof Expression) {
@@ -230,6 +239,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 			self::OPERATOR_NOT_EQUAL_TO => Lang::get('not equal'),
 			self::OPERATOR_GREATER_THAN => Lang::get('greater than'),
 			self::OPERATOR_LESS_THAN => Lang::get('less than'),
+			self::OPERATOR_EMPTY => Lang::get('empty'),
 		);
 
 		$html = '<select name="' . $elementName . '[' . self::OPERATOR . ']" id="op-col-' . $id . '">';
@@ -296,6 +306,10 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 		$("option", op).each(function() {$(this).removeAttr("disabled")});
 		$("[id^=\'x-"+$(dd).attr("id")+"-\']").each(function () {$(this).hide()});
 
+		if (op.val() == \'' . self::OPERATOR_EMPTY . '\') {
+			return;
+		}
+
 		switch(c.attr("class")) {
 			case "'.Value::TYPE_TEXT.'": 
 				op.find("option[value=\''.self::OPERATOR_GREATER_THAN.'\']").attr("disabled", true);
@@ -323,6 +337,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 	$(document).ready(function() {
 		$("select[id^=\'col-\']").change(function() {filterDropDowns(this)});
 		$("select[id^=\'col-\']").each(function() {filterDropDowns(this)});
+		$("select[id^=\'op-col-\']").change(function() {filterDropDowns("select[id^=\'"+$(this).attr("id").replace("op-","")+"\']")});
 	});
 
 </script>
