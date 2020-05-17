@@ -318,9 +318,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 				$("#x-"+$(dd).attr("id")+"-'.Value::TYPE_BOOLEAN.'").show();
 			break;
 		}
-		if (op.find("option:selected").attr("disabled")) {
-			op.find("option:not(:disabled)").first().attr("selected", true);
-		}
+		op.find("option:not(:disabled)").first().attr("selected", true);
 	}
 	$(document).ready(function() {
 		$("select[id^=\'col-\']").change(function() {filterDropDowns(this)});
