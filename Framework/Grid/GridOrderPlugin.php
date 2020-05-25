@@ -31,14 +31,14 @@ class GridOrderPlugin implements IGridPlugin {
 			// from context (session)
 			$this->order = $contextOrder;
 		} 
+		// cleans bad order params in request
+		$this->clean();
+
 
 		// if order column is boolean type, add default order to it
 		if (count($this->order) === 1 && $this->grid->getColumns()[key($this->order)]->getType() === Value::TYPE_BOOLEAN) {
 			$this->order += $this->grid->getDefaultOrderBy();	
 		}
-
-		// cleans bad order params in request
-		$this->clean();
 
 		if (is_array($this->order) && !empty($this->order)) {
 			// set in grid context
