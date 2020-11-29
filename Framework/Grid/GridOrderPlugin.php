@@ -34,9 +34,8 @@ class GridOrderPlugin implements IGridPlugin {
 		// cleans bad order params in request
 		$this->clean();
 
-
-		// if order column is boolean type, add default order to it
-		if (count($this->order) === 1 && $this->grid->getColumns()[key($this->order)]->getType() === Value::TYPE_BOOLEAN) {
+		// always add default order if only one sort parameter provided to ensure consistent ordering for nulls and booleans
+		if (count($this->order) === 1) {
 			$this->order += $this->grid->getDefaultOrderBy();	
 		}
 
@@ -53,6 +52,12 @@ class GridOrderPlugin implements IGridPlugin {
 
 	public function render() {
 		$cols = $this->grid->getColumns();
+
+		$hiddenDefaultOrderColumns = [];
+		if (array_keys($this->grid->getDefaultOrderBy()) != array_keys($this->order)) {
+			$hiddenDefaultOrderColumns = array_keys($this->grid->getDefaultOrderBy());
+		}
+
 		$html = '
 			<tr>';
 		foreach($cols as $col) {
@@ -65,7 +70,7 @@ class GridOrderPlugin implements IGridPlugin {
 			$html .= '>';
 			if ($col->getSortable()) {
 				$html .= '<a href="' . $this->getOrderUrl($col)  . '" title="' . $col->getTitle() . '">' . $col->getTitle() . '</a>';
-				if (isset($this->order[$col->getName()])) {
+				if (isset($this->order[$col->getName()]) && !in_array($col->getName(), $hiddenDefaultOrderColumns)) {
 					$html .= '<span class="grid-direction"></span>';
 				}
 			} else {
