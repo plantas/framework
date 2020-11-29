@@ -482,7 +482,7 @@ class ' . $this->modelName . ' extends Model {
 		
 		$ret = '';
 		foreach ($words as $w) {
-			$ret .= $w{0};
+			$ret .= substr($w, 0, 1);
 		}
 		return $ret;
 	}
