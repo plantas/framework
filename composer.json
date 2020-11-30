@@ -8,10 +8,9 @@
             "email": "igor.plantas@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "mobiledetect/mobiledetectlib": "dev-master",
-        "swiftmailer/swiftmailer": "^6.3@dev",
-        "phpoffice/phpspreadsheet": "dev-master"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "phpoffice/phpspreadsheet": "^1.15",
+        "swiftmailer/swiftmailer": "^6.2"
     }
 }
