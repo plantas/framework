@@ -24,7 +24,7 @@ abstract class StoragePdo implements IStorable {
 
 	protected function getLastInsertId($field = null, $table = null) {
 		$driver = Config::get('DB_DRIVER', 'mysql');
-		if ($driver == 'pgsql') {
+		if ($driver == 'pgsql' && $table) {
 			return Db::get()->lastInsertId($table . '_' . $field . '_seq');
 		}
 		
