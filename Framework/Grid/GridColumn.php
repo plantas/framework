@@ -11,6 +11,12 @@ class GridColumn {
 	const SEARCHABLE = 'searchable';
 	const VISIBLE = 'visible';
 
+	const TYPE_TEXT = 'text';
+	const TYPE_BOOLEAN = 'bool';
+	const TYPE_NUMERIC = 'numeric';
+	const TYPE_DATE = 'date';
+	//const TYPE_ARRAY = 'array';
+	
 	protected $name;
 	protected $title;
 	protected $type = Value::TYPE_TEXT;
