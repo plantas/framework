@@ -56,8 +56,8 @@ abstract class UserLoginSnippet extends Snippet {
 
 		$this->req = $this->getRequest();
 
-		$this->username = $this->req[self::REQ_USERNAME];
-		$this->password = $this->req[self::REQ_PASSWORD];
+		$this->username = $this->req[self::REQ_USERNAME] ?? null;
+		$this->password = $this->req[self::REQ_PASSWORD] ?? null;
 
 		if (isset($this->req[self::REQ_LOGOUT])) {
 			$this->logout();
