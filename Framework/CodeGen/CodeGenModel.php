@@ -6,7 +6,7 @@ class CodeGenModel {
 
 	protected $source;
 	
-	// arrray with columns meta data
+	// array with columns meta data
 	private $columns;
 	
 	protected $tableName;
@@ -130,7 +130,8 @@ class ' . $this->snippetName . ' extends Snippet {
 
 		if (isset($this->nsReq[self::REQ_EDIT]) || (isset($this->req[Form::REQ_FORM_NAME]) && $this->req[Form::REQ_FORM_NAME] == self::NAMESP)) {
 			return $this->form();
-		} else if (is_numeric($this->nsReq[self::REQ_DELETE])) {
+		}
+		if (is_numeric($this->nsReq[self::REQ_DELETE])) {
 			return $this->delete();
 		}
 		return $this->grid();
@@ -396,7 +397,7 @@ class ' . $this->modelName . ' extends Model {
         protected function insert('.$this->modelName.' $model) {
                 $s = $this->getStatement("insert into '.$this->schemaTableName.' ('.implode(', ', array_values($props)).') values ('.implode(', ', array_keys($props)).')");
                 $s->execute($this->getPdoParams($model->getValues(array('.implode(', ', $modelConst).'))));
-                $model->getProperty('.$this->modelName.'::ID)->setValue($this->getLastInsertId(\''.$this->schemaTableName.'_id_seq\'));
+                $model->getProperty('.$this->modelName.'::ID)->setValue($this->getLastInsertId('.$this->modelName.'::ID, \''.$this->tableName.'\'));
                 return $model;
         }
 
