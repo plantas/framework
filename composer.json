@@ -11,6 +11,9 @@
     "require": {
         "mobiledetect/mobiledetectlib": "^2.8",
         "phpoffice/phpspreadsheet": "^1.15",
-        "swiftmailer/swiftmailer": "^6.2"
+        "swiftmailer/swiftmailer": "^6.2",
+        "socialconnect/oauth2": "^3.0",
+        "socialconnect/auth": "^3.2",
+        "socialconnect/http-client": "^1.0"
     }
 }
