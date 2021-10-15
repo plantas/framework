@@ -3,14 +3,13 @@
 abstract class ACDataSourceSection extends Section {
 
 	const REQ_QUERY = 'term';
-	const REQ_ID = 'id'; 
+	const REQ_ID = 'id';
 
 	public function run() {
 		$req = $this->getRequest();
 		if ($req[self::REQ_QUERY]) {
 			echo $this->getData($req[self::REQ_QUERY]);
-		}
-		else if ($req[self::REQ_ID]) {
+		} elseif ($req[self::REQ_ID]) {
 			echo $this->getItem($req[self::REQ_ID]);
 		}
 	}
