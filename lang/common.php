@@ -45,6 +45,8 @@ $lang = array(
 	'Show' => array('HR' => 'Prikaži'),
 	'back' => array('HR' => 'povratak'),
 	'Back' => array('HR' => 'Povratak'),
+    'approve' => array('HR' => 'potvrdi'),
+    'Approve' => array('HR' => 'Potvrdi'),
 
 	'Actions' => array('HR' => 'Akcije'),
 	'Are you sure you want to delete this record?' => array('HR' => 'Sigurno želite obrisati ovaj zapis?'),
@@ -60,7 +62,7 @@ $lang = array(
 	'empty captcha code' => array('HR' => 'molimo upišite sigurnosni kod sa slike'),
 	'incorrect captcha code' => array('HR' => 'neispravan sigurnosni kod'),
 	'Refresh Image' => array('HR' => 'nova slika'),
-	
+
 	'Required fields are marked with red asterisk' => array('HR' => 'Obavezna polja označena su crvenom zvjezdicom'),
 
 	// file browser
@@ -78,8 +80,8 @@ $lang = array(
 	'Friday' => array('HR' => 'petak'),
 	'Saturday' => array('HR' => 'subota'),
 	'Sunday' => array('HR' => 'nedjelja'),
-	
-	//validation 
+
+	//validation
 	'Invalid e-mail address' => array('HR' => 'Neispravna e-mail adresa'),
 	'Invalid URL' => array('HR' => 'Neispravan URL'),
 );

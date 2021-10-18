@@ -28,7 +28,7 @@ class Util {
 			return self::formatDate($start) . ' - ' . self::formatDate($end);
 		}
 		if ($sm != $em) {
-			return date('d.m.', $start) . ' - ' . date('d.m.Y.', $end);  
+			return date('d.m.', $start) . ' - ' . date('d.m.Y.', $end);
 		}
 		return date('d.', $start) . ' - ' . date('d.m.Y.', $end);
 	}
@@ -48,8 +48,13 @@ class Util {
 	}
 
 	public static function validationError($err) {
-		if (empty($err)) return '';
-		return '<div class="validation-error">' . implode('<br />', Util::escape($err)) . '</div>';
+		if (empty($err)) {
+		    return '';
+        }
+		if (!is_array($err)) {
+		    $err = [$err];
+        }
+		return '<div class="validation-error">' . Util::escape(implode('<br />', $err)) . '</div>';
 	}
 
 
@@ -76,7 +81,7 @@ class Util {
 		// fix value if has leading slash remove it
 		if (substr($var, 0, 1) == '/') $var = substr($var, 1);
 		$index = array_search($var, $parts);
-		if ($index === false) return null;		
+		if ($index === false) return null;
 		return isset($parts[$index+1]) ? $parts[$index+1] : null;
 	}
 
@@ -105,37 +110,37 @@ class Util {
 	public static function transliterate($in, $encoding='utf8') {
 		if (!self::$transliterateMap) {
 			self::$transliterateMap = array(
-				/* Ă */ pack("n*",0xc482) =>  "A",  /* Â */ pack("n*",0xc382) =>  "A",  /* Ą */ pack("n*",0xc484) =>  "A",  /* Á */ pack("n*",0xc381) =>  "A",  
-				/* Ä */ pack("n*",0xc384) =>  "A",  /* À */ pack("n*",0xc380) =>  "A",  /* Ã */ pack("n*",0xc383) =>  "A",  /* Å */ pack("n*",0xc385) =>  "A",  
-				/* Æ */ pack("n*",0xc386) => "AE",  /* Ç */ pack("n*",0xc387) =>  "C",  /* Ć */ pack("n*",0xc486) =>  "C",  /* Č */ pack("n*",0xc48c) =>  "C",  
-				/* Ď */ pack("n*",0xc48e) =>  "D",  /* Đ */ pack("n*",0xc490) =>  "Dj", /* Ð */ pack("n*",0xc390) => "DH", /* Ê */ pack("n*",0xc38a) =>  "E",  
-				/* È */ pack("n*",0xc388) =>  "E",  /* Ę */ pack("n*",0xc498) =>  "E",  /* Ë */ pack("n*",0xc38b) =>  "E",  /* Ě */ pack("n*",0xc49a) =>  "E",  
-				/* É */ pack("n*",0xc389) =>  "E",  /* Î */ pack("n*",0xc38e) =>  "I",  /* Ì */ pack("n*",0xc38c) =>  "I",  /* Ï */ pack("n*",0xc38f) =>  "I",  
-				/* Í */ pack("n*",0xc38d) =>  "I",  /* Ĺ */ pack("n*",0xc4b9) =>  "L",  /* Ł */ pack("n*",0xc581) =>  "L",  /* Ľ */ pack("n*",0xc4bd) =>  "L",  
-				/* Ñ */ pack("n*",0xc391) =>  "N",  /* Ń */ pack("n*",0xc583) =>  "N",  /* Ň */ pack("n*",0xc587) =>  "N",  /* Ó */ pack("n*",0xc393) =>  "O",  
-				/* Ô */ pack("n*",0xc394) =>  "O",  /* Õ */ pack("n*",0xc395) =>  "O",  /* Ø */ pack("n*",0xc398) =>  "O",  /* Ö */ pack("n*",0xc396) =>  "O",  
-				/* Ő */ pack("n*",0xc590) =>  "O",  /* Ò */ pack("n*",0xc392) =>  "O",  /* Œ */ pack("n*",0xc592) => "OE",  /* Ř */ pack("n*",0xc598) =>  "R",  
-				/* Ŕ */ pack("n*",0xc594) =>  "R",  /* Ş */ pack("n*",0xc59e) =>  "S",  /* Ś */ pack("n*",0xc59a) =>  "S",  /* Š */ pack("n*",0xc5a0) =>  "S",  
-				/* Ţ */ pack("n*",0xc5a2) =>  "T",  /* Ť */ pack("n*",0xc5a4) =>  "T",  /* Þ */ pack("n*",0xc39e) => "TH",  /* Ù */ pack("n*",0xc399) =>  "U",  
-				/* Ú */ pack("n*",0xc39a) =>  "U",  /* Ů */ pack("n*",0xc5ae) =>  "U",  /* Ű */ pack("n*",0xc5b0) =>  "U",  /* Û */ pack("n*",0xc39b) =>  "U",  
-				/* Ü */ pack("n*",0xc39c) =>  "U",  /* Ý */ pack("n*",0xc39d) =>  "Y",  /* Ÿ */ pack("n*",0xc5b8) =>  "Y",  /* Ź */ pack("n*",0xc5b9) =>  "Z",  
-				/* Ž */ pack("n*",0xc5bd) =>  "Z",  /* Ż */ pack("n*",0xc5bb) =>  "Z",  /* ã */ pack("n*",0xc3a3) =>  "a",  /* à */ pack("n*",0xc3a0) =>  "a",  
-				/* á */ pack("n*",0xc3a1) =>  "a",  /* å */ pack("n*",0xc3a5) =>  "a",  /* â */ pack("n*",0xc3a2) =>  "a",  /* ă */ pack("n*",0xc483) =>  "a",  
-				/* ä */ pack("n*",0xc3a4) =>  "a",  /* ą */ pack("n*",0xc485) =>  "a",  /* æ */ pack("n*",0xc3a6) => "ae",  /* ç */ pack("n*",0xc3a7) =>  "c",  
-				/* č */ pack("n*",0xc48d) =>  "c",  /* ć */ pack("n*",0xc487) =>  "c",  /* đ */ pack("n*",0xc491) => "dj",  /* ď */ pack("n*",0xc48f) =>  "d",  
-				/* ð */ pack("n*",0xc3b0) => "dh",  /* ę */ pack("n*",0xc499) =>  "e",  /* ě */ pack("n*",0xc49b) =>  "e",  /* ë */ pack("n*",0xc3ab) =>  "e",  
-				/* é */ pack("n*",0xc3a9) =>  "e",  /* ê */ pack("n*",0xc3aa) =>  "e",  /* è */ pack("n*",0xc3a8) =>  "e",  /* î */ pack("n*",0xc3ae) =>  "i",  
-				/* ì */ pack("n*",0xc3ac) =>  "i",  /* ï */ pack("n*",0xc3af) =>  "i",  /* í */ pack("n*",0xc3ad) =>  "i",  /* ĺ */ pack("n*",0xc4ba) =>  "l",  
-				/* ł */ pack("n*",0xc582) =>  "l",  /* ľ */ pack("n*",0xc4be) =>  "l",  /* ń */ pack("n*",0xc584) =>  "n",  /* ñ */ pack("n*",0xc3b1) =>  "n",  
-				/* ň */ pack("n*",0xc588) =>  "n",  /* ö */ pack("n*",0xc3b6) =>  "o",  /* ó */ pack("n*",0xc3b3) =>  "o",  /* ò */ pack("n*",0xc3b2) =>  "o",  
-				/* ő */ pack("n*",0xc591) =>  "o",  /* õ */ pack("n*",0xc3b5) =>  "o",  /* ø */ pack("n*",0xc3b8) =>  "o",  /* ô */ pack("n*",0xc3b4) =>  "o",  
-				/* œ */ pack("n*",0xc593) => "oe",  /* ŕ */ pack("n*",0xc595) =>  "r",  /* ř */ pack("n*",0xc599) =>  "r",  /* ß */ pack("n*",0xc39f) =>  "s",  
-				/* ş */ pack("n*",0xc59f) =>  "s",  /* š */ pack("n*",0xc5a1) =>  "s",  /* ś */ pack("n*",0xc59b) =>  "s",  /* ť */ pack("n*",0xc5a5) =>  "t",  
-				/* ţ */ pack("n*",0xc5a3) =>  "t",  /* þ */ pack("n*",0xc3be) => "th",  /* µ */ pack("n*",0xc2b5) =>  "u",  /* ů */ pack("n*",0xc5af) =>  "u",  
-				/* ú */ pack("n*",0xc3ba) =>  "u",  /* ű */ pack("n*",0xc5b1) =>  "u",  /* û */ pack("n*",0xc3bb) =>  "u",  /* ü */ pack("n*",0xc3bc) =>  "u",  
-				/* ù */ pack("n*",0xc3b9) =>  "u",  /* ÿ */ pack("n*",0xc3bf) =>  "y",  /* ý */ pack("n*",0xc3bd) =>  "y",  /* ź */ pack("n*",0xc5ba) =>  "z",  
-				/* ž */ pack("n*",0xc5be) =>  "z",  /* ż */ pack("n*",0xc5bc) =>  "z",  
-			); 
+				/* Ă */ pack("n*",0xc482) =>  "A",  /* Â */ pack("n*",0xc382) =>  "A",  /* Ą */ pack("n*",0xc484) =>  "A",  /* Á */ pack("n*",0xc381) =>  "A",
+				/* Ä */ pack("n*",0xc384) =>  "A",  /* À */ pack("n*",0xc380) =>  "A",  /* Ã */ pack("n*",0xc383) =>  "A",  /* Å */ pack("n*",0xc385) =>  "A",
+				/* Æ */ pack("n*",0xc386) => "AE",  /* Ç */ pack("n*",0xc387) =>  "C",  /* Ć */ pack("n*",0xc486) =>  "C",  /* Č */ pack("n*",0xc48c) =>  "C",
+				/* Ď */ pack("n*",0xc48e) =>  "D",  /* Đ */ pack("n*",0xc490) =>  "Dj", /* Ð */ pack("n*",0xc390) => "DH", /* Ê */ pack("n*",0xc38a) =>  "E",
+				/* È */ pack("n*",0xc388) =>  "E",  /* Ę */ pack("n*",0xc498) =>  "E",  /* Ë */ pack("n*",0xc38b) =>  "E",  /* Ě */ pack("n*",0xc49a) =>  "E",
+				/* É */ pack("n*",0xc389) =>  "E",  /* Î */ pack("n*",0xc38e) =>  "I",  /* Ì */ pack("n*",0xc38c) =>  "I",  /* Ï */ pack("n*",0xc38f) =>  "I",
+				/* Í */ pack("n*",0xc38d) =>  "I",  /* Ĺ */ pack("n*",0xc4b9) =>  "L",  /* Ł */ pack("n*",0xc581) =>  "L",  /* Ľ */ pack("n*",0xc4bd) =>  "L",
+				/* Ñ */ pack("n*",0xc391) =>  "N",  /* Ń */ pack("n*",0xc583) =>  "N",  /* Ň */ pack("n*",0xc587) =>  "N",  /* Ó */ pack("n*",0xc393) =>  "O",
+				/* Ô */ pack("n*",0xc394) =>  "O",  /* Õ */ pack("n*",0xc395) =>  "O",  /* Ø */ pack("n*",0xc398) =>  "O",  /* Ö */ pack("n*",0xc396) =>  "O",
+				/* Ő */ pack("n*",0xc590) =>  "O",  /* Ò */ pack("n*",0xc392) =>  "O",  /* Œ */ pack("n*",0xc592) => "OE",  /* Ř */ pack("n*",0xc598) =>  "R",
+				/* Ŕ */ pack("n*",0xc594) =>  "R",  /* Ş */ pack("n*",0xc59e) =>  "S",  /* Ś */ pack("n*",0xc59a) =>  "S",  /* Š */ pack("n*",0xc5a0) =>  "S",
+				/* Ţ */ pack("n*",0xc5a2) =>  "T",  /* Ť */ pack("n*",0xc5a4) =>  "T",  /* Þ */ pack("n*",0xc39e) => "TH",  /* Ù */ pack("n*",0xc399) =>  "U",
+				/* Ú */ pack("n*",0xc39a) =>  "U",  /* Ů */ pack("n*",0xc5ae) =>  "U",  /* Ű */ pack("n*",0xc5b0) =>  "U",  /* Û */ pack("n*",0xc39b) =>  "U",
+				/* Ü */ pack("n*",0xc39c) =>  "U",  /* Ý */ pack("n*",0xc39d) =>  "Y",  /* Ÿ */ pack("n*",0xc5b8) =>  "Y",  /* Ź */ pack("n*",0xc5b9) =>  "Z",
+				/* Ž */ pack("n*",0xc5bd) =>  "Z",  /* Ż */ pack("n*",0xc5bb) =>  "Z",  /* ã */ pack("n*",0xc3a3) =>  "a",  /* à */ pack("n*",0xc3a0) =>  "a",
+				/* á */ pack("n*",0xc3a1) =>  "a",  /* å */ pack("n*",0xc3a5) =>  "a",  /* â */ pack("n*",0xc3a2) =>  "a",  /* ă */ pack("n*",0xc483) =>  "a",
+				/* ä */ pack("n*",0xc3a4) =>  "a",  /* ą */ pack("n*",0xc485) =>  "a",  /* æ */ pack("n*",0xc3a6) => "ae",  /* ç */ pack("n*",0xc3a7) =>  "c",
+				/* č */ pack("n*",0xc48d) =>  "c",  /* ć */ pack("n*",0xc487) =>  "c",  /* đ */ pack("n*",0xc491) => "dj",  /* ď */ pack("n*",0xc48f) =>  "d",
+				/* ð */ pack("n*",0xc3b0) => "dh",  /* ę */ pack("n*",0xc499) =>  "e",  /* ě */ pack("n*",0xc49b) =>  "e",  /* ë */ pack("n*",0xc3ab) =>  "e",
+				/* é */ pack("n*",0xc3a9) =>  "e",  /* ê */ pack("n*",0xc3aa) =>  "e",  /* è */ pack("n*",0xc3a8) =>  "e",  /* î */ pack("n*",0xc3ae) =>  "i",
+				/* ì */ pack("n*",0xc3ac) =>  "i",  /* ï */ pack("n*",0xc3af) =>  "i",  /* í */ pack("n*",0xc3ad) =>  "i",  /* ĺ */ pack("n*",0xc4ba) =>  "l",
+				/* ł */ pack("n*",0xc582) =>  "l",  /* ľ */ pack("n*",0xc4be) =>  "l",  /* ń */ pack("n*",0xc584) =>  "n",  /* ñ */ pack("n*",0xc3b1) =>  "n",
+				/* ň */ pack("n*",0xc588) =>  "n",  /* ö */ pack("n*",0xc3b6) =>  "o",  /* ó */ pack("n*",0xc3b3) =>  "o",  /* ò */ pack("n*",0xc3b2) =>  "o",
+				/* ő */ pack("n*",0xc591) =>  "o",  /* õ */ pack("n*",0xc3b5) =>  "o",  /* ø */ pack("n*",0xc3b8) =>  "o",  /* ô */ pack("n*",0xc3b4) =>  "o",
+				/* œ */ pack("n*",0xc593) => "oe",  /* ŕ */ pack("n*",0xc595) =>  "r",  /* ř */ pack("n*",0xc599) =>  "r",  /* ß */ pack("n*",0xc39f) =>  "s",
+				/* ş */ pack("n*",0xc59f) =>  "s",  /* š */ pack("n*",0xc5a1) =>  "s",  /* ś */ pack("n*",0xc59b) =>  "s",  /* ť */ pack("n*",0xc5a5) =>  "t",
+				/* ţ */ pack("n*",0xc5a3) =>  "t",  /* þ */ pack("n*",0xc3be) => "th",  /* µ */ pack("n*",0xc2b5) =>  "u",  /* ů */ pack("n*",0xc5af) =>  "u",
+				/* ú */ pack("n*",0xc3ba) =>  "u",  /* ű */ pack("n*",0xc5b1) =>  "u",  /* û */ pack("n*",0xc3bb) =>  "u",  /* ü */ pack("n*",0xc3bc) =>  "u",
+				/* ù */ pack("n*",0xc3b9) =>  "u",  /* ÿ */ pack("n*",0xc3bf) =>  "y",  /* ý */ pack("n*",0xc3bd) =>  "y",  /* ź */ pack("n*",0xc5ba) =>  "z",
+				/* ž */ pack("n*",0xc5be) =>  "z",  /* ż */ pack("n*",0xc5bc) =>  "z",
+			);
 		}
 		if (strtolower($encoding) != 'utf8') {
 			$in = iconv($encoding, 'utf8//ignore');
@@ -150,7 +155,7 @@ class Util {
 	public static function isValidEmail($email) {
 		return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
-	
+
 	public static function isValidOib($oib) {
 		if ( strlen($oib) == 11 ) {
 			if ( is_numeric($oib) ) {
@@ -177,7 +182,7 @@ class Util {
 			return false;
 
 		}
-		return false;	
+		return false;
 	}
 
 	public static function titleSlug($in) {
@@ -187,7 +192,7 @@ class Util {
 		$out = preg_replace('/[\s_]/','-', $out);
 		$out = preg_replace('/-+/','-', $out);
 		return $out . '.html';
-	}	
+	}
 
 	// measures password strength
 	// returns value between 0 - 100 (higher is stronger)
@@ -285,7 +290,7 @@ class Util {
 		}
 
 		return $strength;
-	} 
+	}
 
 	public static function isMobileDevice() {
 		$detect = new Mobile_Detect;
@@ -293,4 +298,9 @@ class Util {
 		//$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
 		return $detect->isMobile();
 	}
+
+    public static function formatHRK($value): string
+    {
+        return number_format($value,2, ',', '.') . ' kn';
+    }
 }
