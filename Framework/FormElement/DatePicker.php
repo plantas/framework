@@ -60,7 +60,7 @@ class DatePicker extends TextLine {
 ';		
 		}
 		$ret .= '<div class="input-group">';
-		$ret .= '<input type="text" id="da-' . $id . '" name="da-' . $this->getName() . '" value="' . Util::formatDate($this->getValue(), $this->format) . '" readonly="readonly" class="form-control col-3" />';
+		$ret .= '<input type="text" id="da-' . $id . '" name="da-' . $this->getName() . '" value="' . Util::formatDate($this->getValue(), $this->format) . '" readonly="readonly" class="form-control '.($this instanceof DateTimePicker ? 'col-5':'col-3').'" />';
 		if (!$ro) {
 			// hide button if it is readonly
 			$ret .= '<input type="button" id="btn-' . $id . '" value="..." class="calendar-picker" />';
