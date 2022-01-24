@@ -1,0 +1,25 @@
+{
+  "name": "plant/framework",
+  "type": "framework",
+  "license": "none",
+  "authors": [
+    {
+      "name": "Igor Plantas",
+      "email": "igor.plantas@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">7.4",
+    "mobiledetect/mobiledetectlib": "^2.8",
+    "phpoffice/phpspreadsheet": "^1.15",
+    "socialconnect/oauth2": "^3.0",
+    "socialconnect/auth": "^3.3",
+    "socialconnect/http-client": "^1.0",
+    "google/apiclient": "^2.0",
+    "ext-json": "*",
+    "symfony/mime": "^6.0"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.4.x-dev"
+  }
+}
