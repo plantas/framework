@@ -14,6 +14,7 @@
         "swiftmailer/swiftmailer": "^6.2",
         "socialconnect/oauth2": "^3.0",
         "socialconnect/auth": "^3.2",
-        "socialconnect/http-client": "^1.0"
+        "socialconnect/http-client": "^1.0",
+        "symfony/mailer": "^6.0"
     }
 }
