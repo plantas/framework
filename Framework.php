@@ -14,7 +14,8 @@ class Framework {
 			'/Element/',	
 			'/Grid/',	
 			'/CodeGen/',	
-			'/DataSource/'	
+			'/DataSource/',
+			'/Google/',
 		);
 	}		
 
