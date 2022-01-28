@@ -426,7 +426,7 @@ class ' . $this->modelName . ' extends Model {
 	protected function generateOtherMethods() {
 		return 
 '	public function exists($id) {
-		if (is_null($id)) return false;
+		if (!$id) return false;
 		$s = $this->getStatement("select count(id) from '.$this->schemaTableName.' where id = ?");
 		$s->execute(array($id));
 		return ($s->fetchColumn() > 0);
