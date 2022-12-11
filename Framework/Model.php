@@ -110,13 +110,19 @@ abstract class Model implements ArrayAccess, IEquatable {
 	}
 
 	public function offsetExists($offset): bool {
-		return ($this->properties[$offset] instanceof ModelProperty);
+		return isset($this->properties[$offset]) && $this->properties[$offset] instanceof ModelProperty;
 	}
 
 	public function offsetUnset($offset): void {
 	}
 
 	public function offsetGet($offset): mixed {
-		return ($this->properties[$offset] instanceof ModelProperty) ? $this->properties[$offset]->getValue() : null;
+        if (!isset($this->properties[$offset])) {
+            return null;
+        }
+        if (!$this->properties[$offset] instanceof ModelProperty) {
+            return null;
+        }
+		return $this->properties[$offset]->getValue();
 	}
 }

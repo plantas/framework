@@ -52,7 +52,7 @@ class GridPagerPlugin implements IGridPlugin {
 			$this->rpp = $c->get(self::RPP);
 		}
 		if (is_null($this->rpp) || !in_array($this->rpp, $this->rppOptions)) {
-			$this->rpp = $this->rppOptions[0];
+			$this->rpp = $this->rppOptions[0] ?? 0;
 		}
 		// set in grid context
 		$c->set(self::PAGE, $this->page);
@@ -83,7 +83,7 @@ class GridPagerPlugin implements IGridPlugin {
 	protected function renderRecordsCount() {
 		if (!$this->recordsCount) return '';
 
-		$cnt = $this->grid->getDataRowCount(); 
+		$cnt = $this->grid->getDataRowCount();
 		$dispCnt = count($this->grid->getData());
 		$html = '';
 		if (is_numeric($cnt)) {

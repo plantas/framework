@@ -1,13 +1,13 @@
-<?php 
+<?php
 
 class Collection implements ICollection {
 
 	protected $elements = array();
 
-	function getIterator() {
+	function getIterator(): Traversable {
 		return new ArrayIterator($this->elements);
 	}
-	
+
 	function __construct() {
 		$args = func_get_args();
 		if (!empty($args)) {
@@ -20,18 +20,18 @@ class Collection implements ICollection {
 	protected function setElements(array $elements) {
 		$this->elements = $elements;
 	}
-	
+
 	/**
 	 * @return array
 	 */
 	public function getArray() {
 		return $this->elements;
 	}
-	
+
 	public function clear() {
 		$this->setElements(array());
 	}
-	
+
 	/**
 	 * adds an element $el to the collection
 	 */
@@ -40,11 +40,11 @@ class Collection implements ICollection {
 		$this->elements[$idx] = $obj;
 		return $idx;
 	}
-	
+
 	/**
 	 * removes the first found element
-	 * uses binary object comparison if $this does not implement IIdentifiable  
-	 * 
+	 * uses binary object comparison if $this does not implement IIdentifiable
+	 *
 	 * @param $element
 	 * @return boolean - if an element has been removed
 	 */
@@ -68,7 +68,7 @@ class Collection implements ICollection {
 		}
 		return false;
 	}
-	
+
 	public function contains($element) {
 		$elements = $this->getArray();
 		foreach ($elements as $el) {
@@ -81,23 +81,23 @@ class Collection implements ICollection {
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
-	
+
 	/**
 	 * @param ICollection $col2
-	 * @return ICollection 
+	 * @return ICollection
 	 */
 	public function union(ICollection $union) {
 		$ret = clone $this;
 		foreach ($union as $oneElement) {
 			$ret->addElement($oneElement);
 		}
-		return $ret; 
+		return $ret;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return ICollection
 	 */
 	public function except(ICollection $except) {
@@ -112,7 +112,7 @@ class Collection implements ICollection {
 		}
 		return $ret;
 	}
-	
+
 	public function distinct() {
 		$ret = clone $this;
 		$ret->clear();
@@ -124,30 +124,30 @@ class Collection implements ICollection {
 		}
 		return $ret;
 	}
-	
+
 	/* Iterator and Countable implementation */
-//	private $idx=0;	
+//	private $idx=0;
 //	public function rewind() { $this->idx = 0; }
 //	public function current() { return $this->elements[$this->idx]; }
 //	public function key() {	return $this->idx; }
 //	public function next() { $this->idx++; }
 //	public function valid() { return $this->idx < $this->count(); }
 
-	public function count() { 
-		return count($this->elements); 
-	}	
-	
+	public function count(): int {
+		return count($this->elements);
+	}
+
 	function __toString() {
 		$array = $this->getArray();
-		return implode(', ', $array); 
+		return implode(', ', $array);
 	}
-	
+
 	public static function factoryFromArray(array $arr=array()) {
 		$c = new Collection();
 		foreach ($arr as $a) {
 			$c->addElement($a);
-		}		
+		}
 		return $c;
 	}
-	
+
 }

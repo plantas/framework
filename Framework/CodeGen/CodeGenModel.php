@@ -1,14 +1,14 @@
 <?php
 
 class CodeGenModel {
-	
+
 	const SOURCE = 'source';
 
 	protected $source;
-	
+
 	// array with columns meta data
 	private $columns;
-	
+
 	protected $tableName;
 	protected $className;
 	protected $modelName;
@@ -20,7 +20,7 @@ class CodeGenModel {
 			$this->setSource($params[self::SOURCE]);
 		}
 	}
-	
+
 	public function setSource(CodeGenModelSourceInterface $source) {
 		$this->source = $source;
 		$this->prepareSource();
@@ -29,7 +29,7 @@ class CodeGenModel {
 	public function getSource() {
 		return $this->source;
 	}
-	
+
 	protected function prepareSource() {
 		$this->columns = $this->source->getColumnsMeta();
 		if (empty($this->columns)) {
@@ -37,10 +37,10 @@ class CodeGenModel {
 		}
 		foreach ($this->columns as $key => $col) {
 			$name = $col[CodeGenModelSourceInterface::COL_NAME];
-			
+
 			$this->columns[$key]['name'] = $name;
 			$this->columns[$key]['NAME'] = strtoupper($name);
-			
+
 			$camel = $this->toCamelCase($name);
 			$this->columns[$key]['camelName'] = $camel;
 			$this->columns[$key]['CamelName'] = ucfirst($camel);
@@ -53,7 +53,7 @@ class CodeGenModel {
 		$this->storageName = $this->className . 'Storage';
 		$this->snippetName = 'Admin' . $this->className . 'Snippet';
 	}
-	
+
 	public function getClassName() {
 		return $this->className;
 	}
@@ -69,12 +69,12 @@ class CodeGenModel {
 	}
 
 	public function generateModel() {
-		return 
+		return
 	$this->generateModelClassDefinition() . '
 ' . $this->generateClassConstants() . '
 ' . $this->generateConstructor() . '
 }
-';		
+';
 		return $ret;
 	}
 
@@ -131,7 +131,7 @@ class ' . $this->snippetName . ' extends Snippet {
 		if (isset($this->nsReq[self::REQ_EDIT]) || (isset($this->req[Form::REQ_FORM_NAME]) && $this->req[Form::REQ_FORM_NAME] == self::NAMESP)) {
 			return $this->form();
 		}
-		if (is_numeric($this->nsReq[self::REQ_DELETE])) {
+		if (isset($this->nsReq[self::REQ_DELETE])) {
 			return $this->delete();
 		}
 		return $this->grid();
@@ -230,7 +230,7 @@ class ' . $this->snippetName . ' extends Snippet {
 		foreach ($this->columns as $col) {
 			if ($col['NAME'] != 'ID') {
 			$ret .= '
-				<tr><td>\' . $l['.$this->modelName.'::'.$col['NAME'].'] . \'</td><td>\' . $e['.$this->modelName.'::'.$col['NAME'].'] . Util::validationError($r['.$this->modelName.'::'.$col['NAME'].']) . \'</td></tr>';
+				<tr><td>\' . $l['.$this->modelName.'::'.$col['NAME'].'] . \'</td><td>\' . $e['.$this->modelName.'::'.$col['NAME'].'] . Util::validationError($r['.$this->modelName.'::'.$col['NAME'].'] ?? null) . \'</td></tr>';
 			}
 		}
 		$ret .=	'
@@ -281,7 +281,7 @@ class ' . $this->snippetName . ' extends Snippet {
 
 		return $ret;
 	}
-	
+
 	protected function generateFormElement($col) {
 		$formElementClass = $this->getFormElementClass($col);
 		$ret = '
@@ -299,7 +299,7 @@ class ' . $this->snippetName . ' extends Snippet {
 			Label::FOR_ELEMENT => $e	
 		)); 
 ';
-		}	
+		}
 		return $ret;
 	}
 
@@ -309,7 +309,7 @@ class ' . $this->snippetName . ' extends Snippet {
 
 class ' . $this->storageName . ' extends StoragePdo {
 		';
-		
+
 		return $ret;
 	}
 
@@ -318,20 +318,20 @@ class ' . $this->storageName . ' extends StoragePdo {
 		
 class ' . $this->modelName . ' extends Model {
 		';
-		
+
 		return $ret;
 	}
-	
-	
-// model 
+
+
+// model
 	protected function generateClassConstants() {
 		$ret = '';
 		foreach ($this->columns as $col) {
-			$ret .= "	const " . $col['NAME'] . " = '" . $col['name'] . "';\n"; 
+			$ret .= "	const " . $col['NAME'] . " = '" . $col['name'] . "';\n";
 		}
 		return $ret;
 	}
-	
+
 	protected function generateConstructor() {
 		$ret = '	public function __construct() {
                 $this->initProperties(array(';
@@ -353,11 +353,11 @@ class ' . $this->modelName . ' extends Model {
 ';
 		return $ret;
 	}
-	
-	
+
+
 // storage
 	protected function generateLoadMethod() {
-		return 
+		return
 '	protected function getQuery() {
 		return "select * from ' . $this->schemaTableName . '";
 	}
@@ -375,16 +375,16 @@ class ' . $this->modelName . ' extends Model {
         }
 ';
 	}
-	
+
 	protected function generateSaveMethod() {
 		$props = array();
 		$modelConst = array();
 		$pairs = array();
 		foreach ($this->columns as $col) {
 			if ($col['name'] != 'id') {
-				$props[':'.$col['name']] = $col['name'];			
+				$props[':'.$col['name']] = $col['name'];
 				$modelConst[] = $this->modelName . '::' . $col['NAME'];
-				$pairs[] = $col['name'] . ' = :' . $col['name'];  
+				$pairs[] = $col['name'] . ' = :' . $col['name'];
 			}
 		}
 
@@ -406,12 +406,12 @@ class ' . $this->modelName . ' extends Model {
                 $s->execute($this->getPdoParams($model->getValues(array('.implode(', ', $modelConst).', '.$this->modelName.'::ID))));
                 return $model;
         }
-';		
+';
 		return $ret;
 	}
 
 	protected function generateDeleteMethod() {
-		return 
+		return
 '	public function delete(Model $model) {
                 if ($model instanceof '.$this->modelName.') {
                         $s = $this->getStatement("delete from '.$this->schemaTableName.' where id = :id");
@@ -420,11 +420,11 @@ class ' . $this->modelName . ' extends Model {
 			throw new Exception(\'Invalid model given\');
 		}
         }
-';		
-	}	
-	
+';
+	}
+
 	protected function generateOtherMethods() {
-		return 
+		return
 '	public function exists($id) {
 		if (!$id) return false;
 		$s = $this->getStatement("select count(id) from '.$this->schemaTableName.' where id = ?");
@@ -435,9 +435,9 @@ class ' . $this->modelName . ' extends Model {
         public function getDataSource() {
 		return new DataSourcePdo(Db::get(), $this->getQuery());
 	}
-';	
+';
 	}
-	
+
 
 // helper methods
 	protected function getPropertyClass($col) {
@@ -469,18 +469,18 @@ class ' . $this->modelName . ' extends Model {
 	// converts code_tag to codeTag
 	protected function toCamelCase($string) {
 		$words = explode('_', $string);
-		
+
 		$ret = array_shift($words); // do not ucfirst first word
 		foreach ($words as $w) {
 			$ret .= ucfirst($w);
 		}
 		return $ret;
 	}
-	
+
 	// converts code_tag to ct
 	protected function getAbbreviation($string) {
 		$words = explode('_', strtolower($string));
-		
+
 		$ret = '';
 		foreach ($words as $w) {
 			$ret .= substr($w, 0, 1);

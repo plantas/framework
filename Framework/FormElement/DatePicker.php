@@ -22,7 +22,7 @@ class DatePicker extends TextLine {
 		// config defaults
 		//$this->config['electric'] = 'true';
 
-		if (is_array($params[self::CONFIG])) {
+		if (is_array($params[self::CONFIG] ?? null)) {
 			$this->config = array_merge($this->config, $params[self::CONFIG]);
 		}
 
@@ -38,7 +38,7 @@ class DatePicker extends TextLine {
 		$ret = '';
 		$id = $this->getId();
 		if (empty($id)) throw new Exception('Id must be set');
-		
+
 		$ro = $this->getReadOnly();
 		if (!$ro) {
 			File::includeJs('jquery.js', File::LIB_DIR);
@@ -57,7 +57,7 @@ class DatePicker extends TextLine {
 		});
 	});
 </script>
-';		
+';
 		}
 		$ret .= '<div class="input-group">';
 		$ret .= '<input type="text" id="da-' . $id . '" name="da-' . $this->getName() . '" value="' . Util::formatDate($this->getValue(), $this->format) . '" readonly="readonly" class="form-control '.($this instanceof DateTimePicker ? 'col-5':'col-3').'" />';
@@ -110,7 +110,7 @@ Symbol  Meaning
 %w 	the day of the week ( 0 .. 6, 0 = SUN )
 %y 	year without the century ( 00 .. 99 )
 %Y 	year including the century ( ex. 1979 )
-%% 	a literal % character 	
+%% 	a literal % character
 */
 	private function convertPhpFormatString($phpFormat) {
 		$f = preg_replace('/(\w)/', '%$0', $phpFormat);
