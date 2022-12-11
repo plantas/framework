@@ -58,7 +58,7 @@ $().ready(function() {
 		if ($this->getReadOnly()) {
 			$ret .= ' readonly="readonly"';
 		}
-		if ($this->maxlength) {
+		if (isset($this->maxlength)) {
 			$ret .= ' maxlength="' . $this->maxlength . '"';
 		}
 		if ($this->size) {

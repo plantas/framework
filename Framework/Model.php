@@ -28,7 +28,7 @@ abstract class Model implements ArrayAccess, IEquatable {
 					$this->properties[$k]->setValue($v);
 				}
 			}
-		}	
+		}
 	}
 
 	/*

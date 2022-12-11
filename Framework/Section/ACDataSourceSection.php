@@ -7,9 +7,9 @@ abstract class ACDataSourceSection extends Section {
 
 	public function run() {
 		$req = $this->getRequest();
-		if ($req[self::REQ_QUERY]) {
+		if (isset($req[self::REQ_QUERY])) {
 			echo $this->getData($req[self::REQ_QUERY]);
-		} elseif ($req[self::REQ_ID]) {
+		} elseif (isset($req[self::REQ_ID])) {
 			echo $this->getItem($req[self::REQ_ID]);
 		}
 	}
