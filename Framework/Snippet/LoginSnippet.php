@@ -68,8 +68,8 @@ abstract class LoginSnippet extends Snippet {
 		$this->req = $this->getRequest();
 		$this->nsReq = $this->getRequest(self::NAMESP);
 
-		$this->username = $this->nsReq[self::REQ_USERNAME];
-		$this->password = $this->nsReq[self::REQ_PASSWORD];
+		$this->username = $this->nsReq[self::REQ_USERNAME] ?? '';
+		$this->password = $this->nsReq[self::REQ_PASSWORD] ?? '';
 		$this->passwordHash = $this->getPasswordHash($this->password);
 		$this->remember = isset($this->nsReq[self::REQ_REMEMBER]);
 
