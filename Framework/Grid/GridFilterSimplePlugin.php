@@ -21,7 +21,7 @@ class GridFilterSimplePlugin extends GridFilter {
 			$this->filter = $query;
 			$c->set(self::FILTER, $this->filter);
 		}
-		if ($req[self::RESET]) {
+		if (isset($req[self::RESET])) {
 			$this->filter = null;
 			$c->set(self::FILTER, $this->filter);
 		}

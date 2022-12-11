@@ -71,7 +71,7 @@ EOF;
 
 		$id = $this->getId();
 
-		$ret .= '
+		$ret = '
 		<div id="'.$id.'-tabs">
 			<div class="widget-tab">';
 

@@ -165,13 +165,13 @@ class Grid {
 
 				if ($formatFunction) {
 					$args = array(
-						self::FF_VALUE => $row[$colName],
+						self::FF_VALUE => $row[$colName] ?? null,
 						self::FF_ROW => $row,
 						self::FF_GRID => $this
 					);
 					$this->data[$key][$colName] = call_user_func($formatFunction, $args);
 				} else { 
-					$this->data[$key][$colName] = nl2br(Util::escape($row[$colName]));
+					$this->data[$key][$colName] = nl2br(Util::escape($row[$colName]) ?? '');
 				}
 			}
 

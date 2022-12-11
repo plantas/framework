@@ -30,7 +30,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 			$this->filter = $this->cleanFilter($req[self::FILTER]);
 			$c->set(self::FILTER, $this->filter);
 		}
-		if ($req[self::RESET]) {
+		if (isset($req[self::RESET])) {
 			$this->filter = null;
 			$c->set(self::FILTER, $this->filter);
 		}
@@ -225,7 +225,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 
 		$html = '<select name="' . $elementName . '[' . self::COLUMN . ']" id="col-' . $id . '">';
 		foreach ($searchableCols as $col)  {
-			$html .= '<option value="' . $col->getName() . '" class="' . $col->getType() . '"' . ($value[self::COLUMN] == $col->getName() ? ' selected="selected"' : '') . '>' . $col->getTitle() . '</option>';
+			$html .= '<option value="' . $col->getName() . '" class="' . $col->getType() . '"' . (isset($value[self::COLUMN]) && $value[self::COLUMN] == $col->getName() ? ' selected="selected"' : '') . '>' . $col->getTitle() . '</option>';
 		}
 		$html .= '</select>
 		';
@@ -245,7 +245,7 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 		$html = '<select name="' . $elementName . '[' . self::OPERATOR . ']" id="op-col-' . $id . '">';
 		foreach ($operators as $k => $v) {
 			$html .= '
-				<option value="' . $k . '"' . ($k == $value[self::OPERATOR] ? ' selected="selected"' : '') . '>' . $v . '</option>';
+				<option value="' . $k . '"' . ($k == ($value[self::OPERATOR] ?? null) ? ' selected="selected"' : '') . '>' . $v . '</option>';
 		}
 		$html .= '
 			  </select>
@@ -257,24 +257,24 @@ class GridFilterAdvancedPlugin extends GridFilterSimplePlugin {
 		// create operand form fields for every type
 		$te = new TextLine(array(
 			TextLine::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_TEXT . ']',
-			TextLine::VALUE => $value[self::OPERAND][Value::TYPE_TEXT],
+			TextLine::VALUE => $value[self::OPERAND][Value::TYPE_TEXT] ?? null,
 			TextLine::SIZE => 30,
 			TextLine::CSS_CLASS => 'col-sm-4',
 		));
 		$ne = new TextLine(array(
 			TextLine::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_NUMERIC . ']',
-			TextLine::VALUE => $value[self::OPERAND][Value::TYPE_NUMERIC],
+			TextLine::VALUE => $value[self::OPERAND][Value::TYPE_NUMERIC] ?? null,
 			TextLine::SIZE => 10,
 			TextLine::CSS_CLASS => 'col-sm-2',
 		));
 		$de = new DateInput(array(
 			DateInput::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_DATE . ']',
 			DateInput::ID => $id . '-' . self::OPERAND . '-' . Value::TYPE_DATE,
-			DateInput::VALUE => $value[self::OPERAND][Value::TYPE_DATE],	
+			DateInput::VALUE => $value[self::OPERAND][Value::TYPE_DATE] ?? null,	
 		));
 		$be = new DropDown(array(
 			DropDown::NAME => $elementName . '[' . self::OPERAND . '][' . Value::TYPE_BOOLEAN . ']',
-			DropDown::VALUE => $value[self::OPERAND][Value::TYPE_BOOLEAN],
+			DropDown::VALUE => $value[self::OPERAND][Value::TYPE_BOOLEAN] ?? null,
 			DropDown::OPTIONS => array('t' => Lang::get('yes'), 'f' => Lang::get('no'))
 		));
 

@@ -22,7 +22,7 @@ class GridColumnManagerPlugin implements IGridPlugin {
 		if (isset($req[self::SHOW_ALL_BTN])) {
 			$this->columnsToHide = array();
 			$c->set(self::COLUMNS_TO_HIDE, $this->columnsToHide);
-		} else if (is_array($req[self::COLUMNS_TO_HIDE])) {
+		} else if (is_array($req[self::COLUMNS_TO_HIDE] ?? null)) {
 			$toHide = array_keys($req[self::COLUMNS_TO_HIDE]);
 			foreach ($this->grid->getColumns() as $k => $col) {
 				if (in_array($k, $toHide)) {

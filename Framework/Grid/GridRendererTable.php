@@ -83,8 +83,8 @@ class GridRendererTable extends GridRenderer {
 			$req = $this->grid->getRequest();
 			$c = $this->grid->getContext();
 			$active = 'simplefilter';
-			if ($req[GridFilterAdvancedPlugin::BUTTON] || $req[GridFilterAdvancedPlugin::RESET] || is_array($c->get(GridFilterAdvancedPlugin::FILTER))) $active = 'advancedfilter';
-			if ($req[GridColumnManagerPlugin::SHOW_ALL_BTN] || $req[GridColumnManagerPlugin::HIDE_BTN]) $active = 'colman';
+			if (isset($req[GridFilterAdvancedPlugin::BUTTON]) || isset($req[GridFilterAdvancedPlugin::RESET]) || is_array($c->get(GridFilterAdvancedPlugin::FILTER))) $active = 'advancedfilter';
+			if (isset($req[GridColumnManagerPlugin::SHOW_ALL_BTN]) || isset($req[GridColumnManagerPlugin::HIDE_BTN])) $active = 'colman';
 
 			$t = new SimpleTabs(array(
 				Element::ID => 'grid-toolbar-' . uniqid(),
@@ -103,6 +103,7 @@ class GridRendererTable extends GridRenderer {
 		$data = $this->getGrid()->getData();
 		$cols = $this->getGrid()->getColumns();
 		$html = '';
+		$cnt = 0;
 		if (is_array($data)) {
 			foreach ($data as $row) {
 				$html  .= '
@@ -131,7 +132,7 @@ class GridRendererTable extends GridRenderer {
 		foreach ($cols as $col) {
 			if ($col instanceof GridColumn && $col->getVisible()) {
 				$html .= '
-				<td class="' . $col->getName() . '">' . $summary[$col->getName()] . '</td>';
+				<td class="' . $col->getName() . '">' . ($summary[$col->getName()] ?? '') . '</td>';
 			}
 		}
 		$html .= '
