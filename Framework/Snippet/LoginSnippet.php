@@ -177,15 +177,15 @@ abstract class LoginSnippet extends Snippet {
 		$l = $this->labels;
 		$r = $this->errors;
 
-		$generalError = '<div id="login-err">' . Util::validationError($r[self::ERR_GENERAL]) . '</div>';
-		
+		$generalError = '<div id="login-err">' . Util::validationError($r[self::ERR_GENERAL] ?? null) . '</div>';
+
 		$remember = $this->hasRemember ? '<div id="remember-label">' . $l[self::REQ_REMEMBER] . '</div><div id="remember-field">' . $e[self::addNamespace(self::REQ_REMEMBER)] . '</div>' : '';
 
 		return '<div id="login-form">' . $this->form->getBegin() . $generalError . '
 			<div id="username-label">' . $l[self::REQ_USERNAME] . '</div>
-			<div id="username-field">' . $e[self::addNamespace(self::REQ_USERNAME)] . Util::validationError($r[self::REQ_USERNAME]) . '</div>
+			<div id="username-field">' . $e[self::addNamespace(self::REQ_USERNAME)] . Util::validationError($r[self::REQ_USERNAME] ?? null) . '</div>
 			<div id="password-label">' . $l[self::REQ_PASSWORD] . '</div>
-			<div id="password-field">' . $e[self::addNamespace(self::REQ_PASSWORD)] . Util::validationError($r[self::REQ_PASSWORD]) . '</div>
+			<div id="password-field">' . $e[self::addNamespace(self::REQ_PASSWORD)] . Util::validationError($r[self::REQ_PASSWORD] ?? null) . '</div>
 			' . $remember . '
 			<div id="login-button">' . $e[self::addNamespace(self::REQ_LOGIN)] . '</div>
 			' . $this->form->getEnd() . '</div>';
@@ -205,8 +205,8 @@ abstract class LoginSnippet extends Snippet {
 
 		$this->labels[self::REQ_USERNAME] = new Label(array(
 			Label::TEXT => Lang::get('Username'),
-			Label::FOR_ELEMENT => $e	
-		)); 
+			Label::FOR_ELEMENT => $e
+		));
 
 		$e = new Password(array(
 			FormElement::NAME => self::addNamespace(self::REQ_PASSWORD),
@@ -217,8 +217,8 @@ abstract class LoginSnippet extends Snippet {
 
 		$this->labels[self::REQ_PASSWORD] = new Label(array(
 			Label::TEXT => Lang::get('Password'),
-			Label::FOR_ELEMENT => $e	
-		)); 
+			Label::FOR_ELEMENT => $e
+		));
 
 		if ($this->hasRemember) {
 			$e = new Checkbox(array(
@@ -230,12 +230,12 @@ abstract class LoginSnippet extends Snippet {
 
 			$this->labels[self::REQ_REMEMBER] = new Label(array(
 				Label::TEXT => Lang::get('Remember me'),
-				Label::FOR_ELEMENT => $e	
-			)); 
+				Label::FOR_ELEMENT => $e
+			));
 		}
 
 		$e = new Submit(array(
-			FormElement::NAME => self::addNamespace(self::REQ_LOGIN), 
+			FormElement::NAME => self::addNamespace(self::REQ_LOGIN),
 			FormElement::VALUE => Lang::get('Login')
 		));
 		$this->form->addElement($e);
